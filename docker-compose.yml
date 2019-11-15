@@ -1,0 +1,24 @@
+version: '3'
+services:
+  app:
+    image: node:10-alpine
+    command: 'npm run dev'
+    volumes:
+      - .:/usr/ydb2/
+    working_dir: /usr/ydb2/
+    ports:
+      - '8000:8000'
+      - '8888:8888'
+    environment:
+      - SESSION_SECRET=fghfghdfghasdf
+      - DB_USER=postgres
+      - DB_DATABASE=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+  db:
+    image: postgres:11
+    environment:
+      - POSTGRES_USER=postgres
+    ports:
+      - '5433:5432'
